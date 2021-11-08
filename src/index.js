@@ -5,10 +5,10 @@ let addToy = false;
 
 
 let theStateOfOurFetchData = []
-console.log("This is theStateOfOurFetchData: ", theStateOfOurFetchData) //
+// console.log("This is theStateOfOurFetchData: ", theStateOfOurFetchData) //
 
 let theStateOfOurFetchDataAt1 = []
-console.log("This is theStateOfOurFetchData: ", theStateOfOurFetchData) //
+// console.log("This is theStateOfOurFetchData: ", theStateOfOurFetchData) //
 
 
 
@@ -121,6 +121,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
 
+
   //  Fetching to:  "http://localhost:3000/toys"
   //// Will Return an Array of Objects:: [ {},{},{} ]
   fetch("http://localhost:3000/toys")
@@ -139,16 +140,88 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
       
-    let oneToy = theStateOfOurFetchData[0]
+    let oneToy = theStateOfOurFetchData[4]
     console.log("oneToy ->", oneToy) //
     // oneToy = theStateOfOurFetchData[1]
     // console.log("oneToy ->", oneToy) //
 
 
-      const oneToyOnTheDOM = document.createElement("h1")
-      oneToyOnTheDOM.textContent = oneToy.name
+      // - One Toy - Using Create Element
+
+      // const oneToyOnTheDOM = document.createElement("div")
+      //   oneToyOnTheDOM.classList.add("card")
+
+      // const h2ForOneToyOnTheDom = document.createElement("h2")
+      //   h2ForOneToyOnTheDom.textContent = oneToy.name
+
+      //   // oneToyOnTheDOM.append(h2ForOneToyOnTheDom)
+      //   // <div class="card"> <h2> oneToy.name </h2> </div>
+
+      // const imgForOneToyOnTheDom = document.createElement("img")
+      //   imgForOneToyOnTheDom.classList.add("toy-avatar")
+      //   imgForOneToyOnTheDom.src = oneToy.image
+
+      //   // oneToyOnTheDOM.append(imgForOneToyOnTheDom)
+      //   // <div> 
+      //     //<h2> oneToy.name </h2> 
+      //     // <img src="[toy_image_url]" class="toy-avatar" />
+      //   //</div>
+
+
+      // const pTagForOneToyOnTheDom = document.createElement("p")
+      //   pTagForOneToyOnTheDom.textContent = `${oneToy.likes} Likes`
+
+      //   // oneToyOnTheDOM.append(pTagForOneToyOnTheDom)
+
+      // const likeButtonForOneToyOnTheDom = document.createElement("button")
+      //   likeButtonForOneToyOnTheDom.textContent = "Like <3"
+      //   likeButtonForOneToyOnTheDom.classList.add("like-btn")
+      //   likeButtonForOneToyOnTheDom.id = oneToy.id 
+
+      //   // oneToyOnTheDOM.append(likeButtonForOneToyOnTheDom)
+
+      // oneToyOnTheDOM.append(
+      //   h2ForOneToyOnTheDom, 
+      //   imgForOneToyOnTheDom, 
+      //   pTagForOneToyOnTheDom,
+      //   likeButtonForOneToyOnTheDom
+      // )
+      // console.log("This is oneToyOnTheDOM-> ", oneToyOnTheDOM) //
+
+
+
+
+      // - One Toy - Using Create InnerHTML
+
+      const oneToyOnTheDOM = document.createElement("div")
+      oneToyOnTheDOM.classList.add("card")
+
+      oneToyOnTheDOM.innerHTML = `
+
+          <h2>${oneToy.name}</h2>
+          <img src="${oneToy.image}" class="toy-avatar" />
+          <p>${oneToy.likes} Likes </p>
+          <button class="like-btn" id="${oneToy.id}">Like <3</button>
+
+      `
+
+      console.log("This is oneToyOnTheDOM-> ", oneToyOnTheDOM) //
+
+      
+      toyCollectionDiv.append(oneToyOnTheDOM)
+
+      const likeButtonForOneToyOnTheDom = oneToyOnTheDOM.querySelector(".like-btn")
+        console.log("Did We Get It? ->", likeButtonForOneToyOnTheDom)
+      
+      const pTagForOneToyOnTheDom = oneToyOnTheDOM.querySelector("p")
+        console.log("Did We Get It? ->", pTagForOneToyOnTheDom)
+      
+      
+      //// Save State - The Last Time Everything Worked 
+      // const oneToyOnTheDOM = document.createElement("h1")
+      // oneToyOnTheDOM.textContent = oneToy.name
+      ////
   
-    toyCollectionDiv.append(oneToyOnTheDOM)
 
 
       // addEventListener()
@@ -160,7 +233,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
           console.log("clickity-click!")
 
         }
-      oneToyOnTheDOM.addEventListener("click", ()=>{ console.log("clickity-click!")} )
+        likeButtonForOneToyOnTheDom.addEventListener("click", 
+          ()=>{ 
+            
+            console.log("clickity-click! We Want to Increment This: ", oneToy.likes)
+
+            let likesForOneToyOnTheDOM = ++oneToy.likes
+            pTagForOneToyOnTheDom.innerText = `${likesForOneToyOnTheDOM} Likes`
+
+
+      
+      
+          } 
+        )
       // oneToyOnTheDOM.addEventListener("click", clickity )
 
 
