@@ -272,4 +272,108 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
 
+
+
+
+
+
+
+
+
+
+  console.log("======== OUR SECOND FETCH ========")
+
+
+  // fetch( GO FETCH ).then( CHANGE DATA TO JSON ).then( NOW WE CAN ATCUALLY USE IT )
+    // fetch( GO FETCH )
+    //.then( CHANGE DATA TO JSON )
+    //.then( NOW WE CAN ATCUALLY USE IT )
+  fetch("http://localhost:3000/toys")
+  .then( 
+    
+    (response)=>{ 
+
+      return response.json() 
+  
+    }
+    //.then(response => response.json())
+
+  )
+  .then(
+
+    
+    // This is an Anonymous Function
+    // function 
+    (fetchedToyArray)=>{ // STARTING CURLY  ->  {
+      
+      console.log("======== OUR SECOND FETCH ========", fetchedToyArray)
+
+      const cardAlreadyOnTheDOM = document.querySelector(".card")
+        // console.log("Hey, Did I Get That? 👀 ->",cardAlreadyOnTheDOM ) //
+
+        const h2ForCardAlreadyOnTheDOM = cardAlreadyOnTheDOM.querySelector("h2")
+          // console.log("Hey, Did I Get That? 👀 ->", h2ForCardAlreadyOnTheDOM )  //
+
+          // console.log(  "What is This? 🧐 :", fetchedToyArray[0].name  ) //
+          // variableWorkingWith = fetchedToyArray     ->  [  {},{},{} ]
+          // variableWorkingWith = fetchedToyArray[0]  ->  {}
+
+          h2ForCardAlreadyOnTheDOM.textContent = fetchedToyArray[0].name
+
+          //// This Worked 🙌
+          // h2ForCardAlreadyOnTheDOM.textContent = "Woobly"
+          ////
+
+  
+          
+    } // CLOSING CURLY  }   <- 
+
+
+  ) 
+  // .then()
+  // .then(  ()=>{}  )
+  // .then(  (data)=>{ console.log(data) }  )
+  // .then(data => console.log("======== OUR SECOND FETCH ========", data)) 
+  // THE FINAL COUNTDOWN
+
+
+  // fetch(URL)
+  //.then(r => r.json())
+  //.then(data => console.log(data))
+
+
+
+  // Interacting with the FORM
+
+  const addToyFormOnTheDOM = document.querySelector(".add-toy-form")
+    console.log("Hey, Did I Get That? 👀 ->", addToyFormOnTheDOM )  //
+
+    addToyFormOnTheDOM.addEventListener("submit", 
+    
+      (event)=>{ 
+
+        event.preventDefault()
+        
+        console.log("click!")  
+
+        event.target.reset()
+    
+      }
+    
+    )
+    // .addEventListener()
+    // .addEventListener( ()=>{} )
+    // .addEventListener( (e)=>{ console.log(e) } )
+
+
+
+
+
+
+
+
+
+
+
+
 });
