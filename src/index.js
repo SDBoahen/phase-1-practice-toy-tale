@@ -160,70 +160,75 @@
 
 
 
-//// Dom Selectors
-
-  const toyCollectionDiv = document.querySelector( "#toy-collection" )
-  // console.log( "This is Our toyCollectionDiv: " , toyCollectionDiv )  //
-
-  const toyCardDivUsingPurelyCreateElement = document.createElement( "div" )
-
-//// Dom Selectors
 
 
 
-  function doTheCodeChallange( arrayOfToyObjects ){
-
-    console.log( "theFetchedDataParsedJSONandReadyToGo: ", arrayOfToyObjects )
 
 
-          //// THIS IS WHERE WE WILL MINIMALLY DO THE REMAINDER OF THE CHALLANGE
+// //// Dom Selectors
+
+//   const toyCollectionDiv = document.querySelector( "#toy-collection" )
+//   // console.log( "This is Our toyCollectionDiv: " , toyCollectionDiv )  //
+
+//   const toyCardDivUsingPurelyCreateElement = document.createElement( "div" )
+
+// //// Dom Selectors
+
+
+
+//   function doTheCodeChallange( arrayOfToyObjects ){
+
+//     console.log( "theFetchedDataParsedJSONandReadyToGo: ", arrayOfToyObjects )
+
+
+//           //// THIS IS WHERE WE WILL MINIMALLY DO THE REMAINDER OF THE CHALLANGE
           
-            let oneToyObjectRex = arrayOfToyObjects[4] // 5thToy - 1 = 4thIndex
+//             let oneToyObjectRex = arrayOfToyObjects[4] // 5thToy - 1 = 4thIndex
 
-              toyCardDivUsingPurelyCreateElement.classList = "card"
+//               toyCardDivUsingPurelyCreateElement.classList = "card"
               
-                const h2ForToyCardDiv = document.createElement( "h2" )
-                  h2ForToyCardDiv.textContent = `${oneToyObjectRex.name} - With CreateElement`
+//                 const h2ForToyCardDiv = document.createElement( "h2" )
+//                   h2ForToyCardDiv.textContent = `${oneToyObjectRex.name} - With CreateElement`
                 
-                const imageForToyCardDiv = document.createElement( "img" )
-                  imageForToyCardDiv.classList = "toy-avatar"
-                  imageForToyCardDiv.src = oneToyObjectRex.image
+//                 const imageForToyCardDiv = document.createElement( "img" )
+//                   imageForToyCardDiv.classList = "toy-avatar"
+//                   imageForToyCardDiv.src = oneToyObjectRex.image
 
-                const pTagForToyCardDiv = document.createElement( "p" )
-                  pTagForToyCardDiv.textContent = `${oneToyObjectRex.likes} Likes`
+//                 const pTagForToyCardDiv = document.createElement( "p" )
+//                   pTagForToyCardDiv.textContent = `${oneToyObjectRex.likes} Likes`
 
-                const likeButtonForToyCardDiv = document.createElement( "button" )
-                  likeButtonForToyCardDiv.textContent = "Like <3"
+//                 const likeButtonForToyCardDiv = document.createElement( "button" )
+//                   likeButtonForToyCardDiv.textContent = "Like <3"
 
-                toyCardDivUsingPurelyCreateElement.append( 
-                  h2ForToyCardDiv, 
-                  imageForToyCardDiv,
-                  pTagForToyCardDiv,
-                  likeButtonForToyCardDiv 
-                )
+//                 toyCardDivUsingPurelyCreateElement.append( 
+//                   h2ForToyCardDiv, 
+//                   imageForToyCardDiv,
+//                   pTagForToyCardDiv,
+//                   likeButtonForToyCardDiv 
+//                 )
 
-              // console.log( "toyCardDivUsingPurelyCreateElement: ", toyCardDivUsingPurelyCreateElement)  //
+//               // console.log( "toyCardDivUsingPurelyCreateElement: ", toyCardDivUsingPurelyCreateElement)  //
 
-            toyCollectionDiv.append( toyCardDivUsingPurelyCreateElement )
-          //// THIS IS WHERE WE WILL MINIMALLY DO THE REMAINDER OF THE CHALLANGE
+//             toyCollectionDiv.append( toyCardDivUsingPurelyCreateElement )
+//           //// THIS IS WHERE WE WILL MINIMALLY DO THE REMAINDER OF THE CHALLANGE
 
-  }
-
-
+//   }
 
 
-fetch( "http://localhost:3008/toys" )
-.then( // .then( start
 
-        function( response ){
 
-          return response.json()
-          // [ {},{},{} ] = arrayOfToyObjects
+// fetch( "http://localhost:3008/toys" )
+// .then( // .then( start
 
-        }
+//         function( response ){
 
-     ) // .then ) end
-.then( doTheCodeChallange )  // doTheCodeChallange( arrayOfToyObjects )
+//           return response.json()
+//           // [ {},{},{} ] = arrayOfToyObjects
+
+//         }
+
+//      ) // .then ) end
+// .then( doTheCodeChallange )  // doTheCodeChallange( arrayOfToyObjects )
 
 
 
@@ -234,6 +239,415 @@ fetch( "http://localhost:3008/toys" )
 // console.log( "This is dataThatIWillUnfortunatelyLOSE: ", dataThatIWillUnfortunatelyLOSE )
 
 // WE ARE OUTSIDE OF THE LAST .then()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // This is a variable responsible for Toggling the Add Toy Form
+let showToyForm = false;
+
+
+document.addEventListener( "DOMContentLoaded" , ()=>{
+
+
+
+
+  const addBtn = document.querySelector("#new-toy-btn");
+  const toyFormContainer = document.querySelector(".container");
+  
+  addBtn.addEventListener( "click" , 
+  
+    () => {
+
+      // hide & seek with the form
+      showToyForm = !showToyForm;
+
+      if (showToyForm) { // TRUE
+        toyFormContainer.style.display = "block";
+      } else { // FALSE
+        toyFormContainer.style.display = "none";
+      }
+    }
+  
+  );
+
+
+  //// Work on the Form
+
+    const addToyForm = document.querySelector( ".add-toy-form" )
+
+      // addToyForm.addEventListener( "submit" , function(){} )
+      addToyForm.addEventListener( 
+        
+        "submit"
+        , 
+        function( eventObject ){
+
+          eventObject.preventDefault( )  
+          // prevent default behavior or submit
+          //// It Will Make The Page Refresh  :(
+
+          console.log( "event Object: " , eventObject )  // object
+          console.log( "eventObject.target: " , eventObject.target )  // actual <Form>
+
+
+          //// Using Array Syntax For Input Fields
+          let firstInputField = eventObject.target[0]
+          console.log( "firstInputField: " , firstInputField )  // 
+          console.log( "firstInputField.value: " , firstInputField.value )  // 
+
+          let secondInputField = eventObject.target[1]
+          console.log( "secondInputField: " , secondInputField )  // 
+          console.log( "secondInputField.value: " , secondInputField.value )  // 
+
+
+          // Using name Property/Attribute for Input Fields
+          let firstInputFieldUsingName = eventObject.target.name
+          console.log( "firstInputFieldUsingName: " , firstInputFieldUsingName )  // 
+          console.log( "firstInputFieldUsingName.value: " , firstInputFieldUsingName.value )  // 
+
+          let secondInputFieldUsingName = eventObject.target.image
+          console.log( "secondInputFieldUsingName: " , secondInputFieldUsingName )  // 
+          console.log( "secondInputFieldUsingName.value: " , secondInputFieldUsingName.value )  // 
+
+
+          const newObject = { 
+
+              // id: 0,
+              image: secondInputField.value,
+              likes: 1234567890,
+              name: firstInputField.value
+
+          }
+          console.log( "newObject: " , newObject ) //
+
+        
+        const toyCollectionDivInFetch = document.querySelector( "#toy-collection" )
+
+
+          const toyCardInFetch = document.createElement( "div" ) // <div></div>
+            toyCardInFetch.setAttribute( "class" , "card" )
+            
+
+            const h2ForToyCardInFetchDivInFetch = document.createElement( "h2" ) // <h2></h2>
+              h2ForToyCardInFetchDivInFetch.textContent = newObject.name
+          toyCardInFetch.append( h2ForToyCardInFetchDivInFetch )
+
+            const imageForToyCardInFetch = document.createElement( "img" ) // <img></img>
+              imageForToyCardInFetch.className = "toy-avatar"
+              imageForToyCardInFetch.src = newObject.image
+          toyCardInFetch.append( imageForToyCardInFetch )
+
+          const pTagForToyCardInFetch = document.createElement( "p" )
+            pTagForToyCardInFetch.textContent = `${newObject.likes} Likes` // interpolation
+            pTagForToyCardInFetch.textContent = newObject.likes + " Likes" // concatination
+          toyCardInFetch.append( pTagForToyCardInFetch )
+
+          const likeButtonForToyCardInFetch = document.createElement( "button" )
+            likeButtonForToyCardInFetch.classList = "like-btn"
+            likeButtonForToyCardInFetch.id = newObject.id
+            likeButtonForToyCardInFetch.textContent = "Like <3"
+          toyCardInFetch.append( likeButtonForToyCardInFetch )
+
+
+          //// Like Button Flow/Work - 'Sam's Santa's Workshop Flow'
+
+            likeButtonForToyCardInFetch.addEventListener( "eventType" , function(){} )
+            likeButtonForToyCardInFetch.addEventListener( 
+              
+              "click" 
+              
+              , 
+              
+              function(){
+
+                
+                // internal - Logic
+                newObject.likes++
+
+                  console.log( "clickity-click! " , newObject.likes )  //
+
+                pTagForToyCardInFetch.textContent = `${newObject.likes} Likes` 
+                // external - DOM
+
+
+                // let newLike = newObject.likes++
+                // // do some more dynamic logic with that newLike Variable
+                // pTagForToyCardInFetch.textContent = `${newLike} Likes` 
+
+
+              } 
+            
+            )
+
+          //// Like Button Flow/Work - 'Sam's Santa's Workshop Flow'
+
+
+          toyCollectionDivInFetch.append( toyCardInFetch )  // THIS WORKS
+
+
+        } 
+        
+      )
+
+    console.log( "addToyForm: " ,  addToyForm )  //
+
+  //// Work on the Form
+    
+
+
+
+});
+//// Fetching with Arrow Function Syntax Sugar - implicit return
+
+fetch( "http://localhost:3008/toys" )
+.then( response => response.json() )
+.then(  
+  
+  (toyArrayOfObjects)=>{ 
+    
+    // console.log( "fecthedtoyArrayOfObjects: " , toyArrayOfObjects ) //
+
+    //   const oneToyObject = toyArrayOfObjects[ 4 ]  // n-1
+    //   console.log( "oneToyObject: " , oneToyObject ) //
+
+    
+    // const toyCollectionDivInFetch = document.querySelector( "#toy-collection" )
+
+
+    //   const toyCardInFetch = document.createElement( "div" ) // <div></div>
+    //     toyCardInFetch.setAttribute( "class" , "card" )
+        
+
+    //     const h2ForToyCardInFetchDivInFetch = document.createElement( "h2" ) // <h2></h2>
+    //       h2ForToyCardInFetchDivInFetch.textContent = oneToyObject.name
+    //   toyCardInFetch.append( h2ForToyCardInFetchDivInFetch )
+
+    //     const imageForToyCardInFetch = document.createElement( "img" ) // <img></img>
+    //       imageForToyCardInFetch.className = "toy-avatar"
+    //       imageForToyCardInFetch.src = oneToyObject.image
+    //   toyCardInFetch.append( imageForToyCardInFetch )
+
+    //   const pTagForToyCardInFetch = document.createElement( "p" )
+    //     pTagForToyCardInFetch.textContent = `${oneToyObject.likes} Likes` // interpolation
+    //     pTagForToyCardInFetch.textContent = oneToyObject.likes + " Likes" // concatination
+    //   toyCardInFetch.append( pTagForToyCardInFetch )
+
+    //   const likeButtonForToyCardInFetch = document.createElement( "button" )
+    //     likeButtonForToyCardInFetch.classList = "like-btn"
+    //     likeButtonForToyCardInFetch.id = oneToyObject.id
+    //     likeButtonForToyCardInFetch.textContent = "Like <3"
+    //   toyCardInFetch.append( likeButtonForToyCardInFetch )
+
+    //   toyCollectionDivInFetch.append( toyCardInFetch )  // THIS WORKS
+    //   console.log( "toyCardInFetch: " , toyCardInFetch ) //
+  
+  }  
+
+)
+
+
+  // ==
+
+
+//// Fetching with function Key Word
+fetch(  "http://localhost:3008/toys" )
+.then(  function( response ){ return response.json() }  )
+.then(
+
+      function( toyArrayOfObjects ){ 
+
+
+        console.log( "fecthedtoyArrayOfObjects: " , toyArrayOfObjects ) //
+
+          const oneToyObject = toyArrayOfObjects[ 4 ]  // n-1
+          console.log( "oneToyObject: " , oneToyObject ) //
+
+        
+        const toyCollectionDivInFetch = document.querySelector( "#toy-collection" )
+
+
+          const toyCardInFetch = document.createElement( "div" ) // <div></div>
+            toyCardInFetch.setAttribute( "class" , "card" )
+            
+
+            const h2ForToyCardInFetchDivInFetch = document.createElement( "h2" ) // <h2></h2>
+              h2ForToyCardInFetchDivInFetch.textContent = oneToyObject.name
+          toyCardInFetch.append( h2ForToyCardInFetchDivInFetch )
+
+            const imageForToyCardInFetch = document.createElement( "img" ) // <img></img>
+              imageForToyCardInFetch.className = "toy-avatar"
+              imageForToyCardInFetch.src = oneToyObject.image
+          toyCardInFetch.append( imageForToyCardInFetch )
+
+          const pTagForToyCardInFetch = document.createElement( "p" )
+            pTagForToyCardInFetch.textContent = `${oneToyObject.likes} Likes` // interpolation
+            pTagForToyCardInFetch.textContent = oneToyObject.likes + " Likes" // concatination
+          toyCardInFetch.append( pTagForToyCardInFetch )
+
+          const likeButtonForToyCardInFetch = document.createElement( "button" )
+            likeButtonForToyCardInFetch.classList = "like-btn"
+            likeButtonForToyCardInFetch.id = oneToyObject.id
+            likeButtonForToyCardInFetch.textContent = "Like <3"
+          toyCardInFetch.append( likeButtonForToyCardInFetch )
+
+
+          //// Like Button Flow/Work - 'Sam's Santa's Workshop Flow'
+
+            // likeButtonForToyCardInFetch.addEventListener( "eventType" , function(){} )
+            // likeButtonForToyCardInFetch.addEventListener( 
+              
+            //   "click" 
+              
+            //   , 
+              
+            //   function(){
+
+                
+            //     // internal - Logic
+            //     oneToyObject.likes++
+
+            //       console.log( "clickity-click! " , oneToyObject.likes )  //
+
+            //     pTagForToyCardInFetch.textContent = `${oneToyObject.likes} Likes` 
+            //     // external - DOM
+
+
+            //     // let newLike = oneToyObject.likes++
+            //     // // do some more dynamic logic with that newLike Variable
+            //     // pTagForToyCardInFetch.textContent = `${newLike} Likes` 
+
+
+            //   } 
+            
+            // )
+
+          //// Like Button Flow/Work - 'Sam's Santa's Workshop Flow'
+
+
+          toyCollectionDivInFetch.append( toyCardInFetch )  // THIS WORKS
+            console.log( "toyCardInFetch: " , toyCardInFetch ) //
+
+
+          //// Like Button Flow/Work - Querying Off The DOM
+
+            const likeButtonToIncrement = document.querySelector( ".like-btn" )
+            console.log( "likeButtonToIncrement: " , likeButtonToIncrement ) //
+
+            likeButtonToIncrement.addEventListener( 
+              
+              "click" 
+              
+              , 
+              
+              function(){
+
+                
+                // internal - Logic
+                oneToyObject.likes++
+
+                  console.log( "clickity-click! " , oneToyObject.likes )  //
+
+                pTagForToyCardInFetch.textContent = `${oneToyObject.likes} Likes` 
+                // external - DOM
+
+
+                // let newLike = oneToyObject.likes++
+                // // do some more dynamic logic with that newLike Variable
+                // pTagForToyCardInFetch.textContent = `${newLike} Likes` 
+
+
+              } 
+            
+            )
+
+          //// Like Button Flow/Work - Querying Off The DOM
+          
+
+
+          
+          
+          
+        }
+        
+)
+        
+        // console.log( "likeButtonForToyCardInFetch: " , likeButtonForToyCardInFetch ) //
+
+/* 
+
+  README Reference Code
+
+  <div class="card">
+    <h2>Woody</h2>
+    <img src="[toy_image_url]" class="toy-avatar" />
+    <p>4 Likes </p>
+    <button class="like-btn" id="[toy_id]">Like <3</button>
+  </div> 
+
+*/
+
+
+      // SAFTEY CODE
+      // const testh1 = document.createElement( "h1" )
+      //   testh1.textContent = "Woobly! :)"
+
+/*
+
+
+      Different Options
+
+      // For Adding a Class
+
+        // toyCardInFetch.setAttribute( "class" , "card" )
+        // toyCardInFetch.classList = "card"
+        // toyCardInFetch.className = "card"
+
+        <h1 class="" >
+        h1{
+
+            class: ""
+
+        }
+
+      // For Adding a Class
+
+
+
+
+      // For Representing Data in Combination with a String
+
+        pTagForToyCardInFetch.textContent = `${oneToyObject.likes} Likes` // interpolation
+        pTagForToyCardInFetch.textContent = oneToyObject.likes + " Likes" // concatination
+
+      // For Representing Data in Combination with a String
+
+
+
+
+      // #EVERYTHING'S AN OBJECT // LOL 
+      <img src="" >
+      img{
+
+          src: ""
+
+      }
+
+
+*/
 
 
 
@@ -471,8 +885,6 @@ fetch( "http://localhost:3008/toys" )
 
 
 
-// // This is a variable responsible for Toggling the Add Toy Form
-// let showToyForm = false;
 
 
 
@@ -480,29 +892,6 @@ fetch( "http://localhost:3008/toys" )
 
 
 
-
-// document .addEventListener( "DOMContentLoaded" , ()=>{
-
-//   const addBtn = document.querySelector("#new-toy-btn");
-//   const toyFormContainer = document.querySelector(".container");
-  
-//   addBtn.addEventListener( "click" , 
-  
-//     () => {
-
-//       // hide & seek with the form
-//       showToyForm = !showToyForm;
-
-//       if (showToyForm) { // TRUE
-//         toyFormContainer.style.display = "block";
-//       } else { // FALSE
-//         toyFormContainer.style.display = "none";
-//       }
-//     }
-  
-//   );
-
-// });
 
 // /*
 
