@@ -1,4 +1,7 @@
-{
+{ 
+
+  "wooblies": [ "someString" ]
+  ,
   "toys": [
     {
       "id": 1,
@@ -49,4 +52,6 @@
       "likes": 1
     }
   ]
+
+
 }
